@@ -1,6 +1,27 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', function($scope, Socket) {
+  $scope.up = function() {
+    console.log("up")
+    Socket.emit("Move", "UP")
+  }
+
+  $scope.down = function() {
+    console.log("down")
+    Socket.emit("Move", "DOWN")
+  }
+
+  $scope.left = function() {
+    console.log("left")
+    Socket.emit("Move", "LEFT")
+  }
+
+  $scope.right = function() {
+    console.log("right")
+    Socket.emit("Move", "RIGHT")
+  }
+
+})
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
