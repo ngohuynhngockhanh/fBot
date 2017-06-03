@@ -1,0 +1,25 @@
+	Login
+	Login by facebook
+	Signup 
+	Forget password
+	Signin 
+	Signout 
+	
+	Robot controller
+		Streamer
+		
+	Robot settings
+	
+	Dung vision api cua microsoft de lam gi do....
+	Share hinh social network
+		Stream facebook
+	Qrcode to call
+	
+	Friend add note o mot noi nao do, thi khi minh den gan thi bao notifuckation
+	cho phep minh add note o mot noi nao do (vd :chich vui qua ahihi )
+	
+	tim duong di den vi tri ma thang friend add note
+
+
+	
+	
