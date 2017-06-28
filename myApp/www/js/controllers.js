@@ -38,38 +38,39 @@ angular.module('starter.controllers', [])
   }
 
   $ionicPlatform.ready(function() {
+    if (window.cordova) {
+      var session = new cordova.plugins.phonertc.Session(config);
+      cordova.plugins.phonertc.setVideoView({
+        container: document.getElementById('videoContainer'),
+        local: {
+          position: [0, 0],
+          size: [100, 100]
+        }
+      });
     
-    var session = new cordova.plugins.phonertc.Session(config);
-    cordova.plugins.phonertc.setVideoView({
-      container: document.getElementById('videoContainer'),
-      local: {
-        position: [0, 0],
-        size: [100, 100]
-      }
-    });
-  
-    session.on('sendMessage', function (data) { 
-        //console.log("sendMessage", data)
-    Socket.emit("SendMessage", isInitiator, data)
-    });
-  
-    Socket.on("SendMessage", function(initiator, data) {
-      session.receiveMessage(data)
-    })
+      session.on('sendMessage', function (data) { 
+          //console.log("sendMessage", data)
+      Socket.emit("SendMessage", isInitiator, data)
+      });
+    
+      Socket.on("SendMessage", function(initiator, data) {
+        session.receiveMessage(data)
+      })
 
-    session.on('answer', function () { 
-        console.log('Other client answered!');
-    });
-  
-    session.on('disconnect', function () { 
-        console.log('Other client disconnected!');
-    });
-  
-  session.call(function() {
-    console.log("sucess")
-  }, function() {
-    console.log("error")
-  });
+      session.on('answer', function () { 
+          console.log('Other client answered!');
+      });
+    
+      session.on('disconnect', function () { 
+          console.log('Other client disconnected!');
+      });
+    
+      session.call(function() {
+        console.log("sucess")
+      }, function() {
+        console.log("error")
+      });
+    }
   
   
   })
