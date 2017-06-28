@@ -8,7 +8,7 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'btford.socket-io'])
 
 .run(function($ionicPlatform, $rootScope) {
-  $rootScope.socketReadURL = "http://192.168.1.21:8081/"
+  $rootScope.socketReadURL = "http://ourshark.mysmarthome.vn:8001/"
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)

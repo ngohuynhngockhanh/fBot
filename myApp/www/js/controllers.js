@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, Socket) {
+.controller('DashCtrl', function($scope, Socket, $ionicPlatform, $timeout) {
   $scope.up = function() {
     console.log("up")
     Socket.emit("Move", "UP")
@@ -20,6 +20,56 @@ angular.module('starter.controllers', [])
     console.log("right")
     Socket.emit("Move", "RIGHT")
   }
+  isInitiator = true// (location.search.split('isInitiator=')[1] != undefined)
+  var config = {
+      isInitiator: isInitiator,
+      turn: {
+        host: 'turn:turn.ourshark.mysmarthome.vn',
+        username: 'admin',
+        password: 'admin'
+      },
+      streams: {
+          audio: false,
+          video: true
+      }
+  }
+
+  $ionicPlatform.ready(function() {
+    
+    var session = new cordova.plugins.phonertc.Session(config);
+  cordova.plugins.phonertc.setVideoView({
+    container: document.getElementById('videoContainer'),
+    local: {
+      position: [0, 0],
+      size: [100, 100]
+    }
+  });
+  
+    session.on('sendMessage', function (data) { 
+        //console.log("sendMessage", data)
+    Socket.emit("SendMessage", isInitiator, data)
+    });
+  
+  Socket.on("SendMessage", function(initiator, data) {
+    session.receiveMessage(data)
+  })
+
+    session.on('answer', function () { 
+        console.log('Other client answered!');
+    });
+  
+    session.on('disconnect', function () { 
+        console.log('Other client disconnected!');
+    });
+  
+  session.call(function() {
+    console.log("sucess")
+  }, function() {
+    console.log("error")
+  });
+  
+  
+  })
 
 })
 
