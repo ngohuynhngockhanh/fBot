@@ -1,6 +1,10 @@
 angular.module('starter.controllers', [])
 
+
 .controller('DashCtrl', function($scope, Socket) {
+
+  $scope.coords = {};
+
   $scope.up = function() {
     console.log("up")
     Socket.emit("Move", "UP")
@@ -21,29 +25,28 @@ angular.module('starter.controllers', [])
     Socket.emit("Move", "RIGHT")
   }
 
+
+  $scope.joystickMove = function(){
+      let direction = $scope.coords;
+      // $scope.wtf = direction;
+      // console.log("x = " + $scope.wtf.x + "   y = " + $scope.wtf.y);
+      let x = direction.x;
+      let y = direction.y;
+      if(y >= 30 && -10 <= x && x <= 10){
+          $scope.up();
+      }
+      else if(y<= -30 && -10 <=x && x <= 10){
+          $scope.down();
+      }
+      else if(x>=28 && -10 <= y && y <= 10){
+          $scope.right();
+      }
+      else if(x <= -28 && -10 <=y && y<=10){
+        $scope.left();
+      }
+  }
+
+
 })
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
-})
-
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
-
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-});

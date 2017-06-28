@@ -1,0 +1,27 @@
+{
+  "name": "angular-joystick",
+  "version": "0.1.0",
+  "main": [
+    "./dist/angular-joystick.js"
+  ],
+  "ignore": [
+    "src",
+    ".*",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "angular": "^1.4.7"
+  },
+  "homepage": "https://github.com/achorein/angular-joystick",
+  "_release": "0.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.0",
+    "commit": "2e15e291b65ac7dc404e3b88b4e617b423987aeb"
+  },
+  "_source": "https://github.com/achorein/angular-joystick.git",
+  "_target": "^0.1.0",
+  "_originalSource": "angular-joystick",
+  "_direct": true
+}

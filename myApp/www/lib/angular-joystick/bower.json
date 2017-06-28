@@ -1,0 +1,16 @@
+{
+  "name": "angular-joystick",
+  "version": "0.1.0",
+  "main": [
+      "./dist/angular-joystick.js"
+  ],
+  "ignore": [
+    "src",
+    ".*",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "angular": "^1.4.7"
+  }
+}

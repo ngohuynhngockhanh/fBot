@@ -1,10 +1,32 @@
 <ion-view view-title="Robot controller">
   <ion-content class="padding">
-    <img src="http://192.168.1.21:8080/?action=stream">
-    <h2>Robot </h2>
-    <button class="button button-balanced" ng-click="up()">Tới</button>
-    <button class="button button-balanced" ng-click="down()">Xuống</button>
-    <button class="button button-balanced" ng-click="left()">Trái</button>
-    <button class="button button-balanced" ng-click="right()">Phải</button>
+<!-- 
+    <div class="content" ng-class="{ 'landscape': !isPortrait }">
+      <img src="http://192.168.1.21:8080/?action=stream"> 
+     <img class="stream_img" src="img/ionic.png" />
+    </div>
+
+    <div class="content" ng-class="{ 'landscape': !isPortrait }">
+     <button class="button button-balanced" ng-click="up()">Tới</button>
+      <button class="button button-balanced" ng-click="down()">Xuống</button>
+      <button class="button button-balanced" ng-click="left()">Trái</button>
+      <button class="button button-balanced" ng-click="right()">Phải</button>
+      <div class="joystick">
+      	<angular-joystick  coords="coords" on-move="joystickMove()"></angular-joystick>
+      </div>
+    </div>
+    -->
+
+    <div class="content">
+        <div>
+            
+        </div>
+        <div ng-class="{'joystick_landscape' : isPortrait==false , 'joystick_portrait' : isPortrait==true}">
+            <angular-joystick  coords="coords" on-move="joystickMove()"></angular-joystick>
+        </div>
+
+    </div>
+
+
   </ion-content>
 </ion-view>

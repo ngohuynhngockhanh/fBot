@@ -5,9 +5,10 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'btford.socket-io'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'btford.socket-io','angular-joystick'])
 
 .run(function($ionicPlatform, $rootScope) {
+  // uncomment this line to use network
   $rootScope.socketReadURL = "http://192.168.1.21:8081/"
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -21,8 +22,29 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    window.addEventListener("orientationchange",function(){
+       console.log(screen.orientation);
+        if(screen.orientation.angle == 0)
+          $rootScope.isPortrait = true;
+        else 
+          $rootScope.isPortrait = false;
+        //debugger;
+       $rootScope.$digest();
+    },false)
+
+
+
   });
 })
+
+
+.run(function($rootScope){
+    $rootScope.isPortrait = true;
+    if(screen.orientation.angle == 90)
+      $rootScope.isPortrait = false;
+})
+
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -51,35 +73,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
-      }
-    })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
-
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  });
-
+  
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 
