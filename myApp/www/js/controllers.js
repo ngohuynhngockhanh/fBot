@@ -1,27 +1,27 @@
 angular.module('starter.controllers', [])
 
 
-.controller('DashCtrl', function($scope, Socket, $ionicPlatform, $timeout) {
+.controller('DashCtrl', function($scope, Socket, $ionicPlatform, $timeout, RaspiSocket) {
   $scope.coords = {};
 
   $scope.up = function() {
     console.log("up")
-    Socket.emit("Move", "UP")
+    RaspiSocket.emit("Move", "UP")
   }
 
   $scope.down = function() {
     console.log("down")
-    Socket.emit("Move", "DOWN")
+    RaspiSocket.emit("Move", "DOWN")
   }
 
   $scope.left = function() {
     console.log("left")
-    Socket.emit("Move", "LEFT")
+    RaspiSocket.emit("Move", "LEFT")
   }
 
   $scope.right = function() {
     console.log("right")
-    Socket.emit("Move", "RIGHT")
+    RaspiSocket.emit("Move", "RIGHT")
   }
   isInitiator = true// (location.search.split('isInitiator=')[1] != undefined)
   var config = {
@@ -32,7 +32,7 @@ angular.module('starter.controllers', [])
         password: 'admin'
       },
       streams: {
-          audio: false,
+          audio: true,
           video: true
       }
   }
@@ -77,11 +77,11 @@ angular.module('starter.controllers', [])
 
 
   $scope.joystickMove = function(){
-      let direction = $scope.coords;
+      var direction = $scope.coords;
       // $scope.wtf = direction;
       // console.log("x = " + $scope.wtf.x + "   y = " + $scope.wtf.y);
-      let x = direction.x;
-      let y = direction.y;
+      var x = direction.x;
+      var y = direction.y;
       if(y >= 30 && -10 <= x && x <= 10){
           $scope.up();
       }

@@ -16,4 +16,20 @@ angular.module('starter.services', [])
 })
 
 
+.factory('RaspiSocket', function (socketFactory, $rootScope) {
+  var mySocket;
+  myIoSocket = io.connect($rootScope.socketRaspiURL);
+
+  mySocket = socketFactory({
+    ioSocket: myIoSocket
+  });
+  mySocket.on('connect', function() {
+    console.log("ok RaspiSocket")
+    mySocket.emit("joinRoom", "controller")
+  })
+
+  return mySocket;
+})
+
+
 

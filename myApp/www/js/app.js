@@ -5,11 +5,12 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'btford.socket-io','angular-joystick'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'btford.socket-io','angular-joystick', 'ngTouch'])
 
-.run(function($ionicPlatform, $rootScope) {
+.run(function($ionicPlatform, $rootScope) { 
 
   $rootScope.socketReadURL = "http://ourshark.mysmarthome.vn:8001/"
+  $rootScope.socketRaspiURL = "http://ourshark.mysmarthome.vn:8001/raspi"
 
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -18,31 +19,31 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
 
+    }   
+    if (window.StatusBar) { 
+      // org.apache.cordova.statusbar required 
+      StatusBar.styleDefault(); 
     }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-
+ 
     window.addEventListener("orientationchange",function(){
        console.log(screen.orientation);
-        if(screen.orientation.angle == 0)
+        if(screen.orientation && screen.orientation.angle == 0)
           $rootScope.isPortrait = true;
-        else 
+        else    
           $rootScope.isPortrait = false;
         //debugger;
        $rootScope.$digest();
-    },false)
+    },false) 
 
 
 
   });
-})
+}) 
 
 
 .run(function($rootScope){
     $rootScope.isPortrait = true;
-    if(screen.orientation.angle == 90)
+    if(screen.orientation && screen.orientation.angle == 90)
       $rootScope.isPortrait = false;
 })
 

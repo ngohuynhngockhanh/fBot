@@ -23,9 +23,13 @@ angular.module('angular-joystick').directive('angularJoystick', function(Joystic
             onMove: '&'
         },
         template: '<div '+
+			'ng-touchstart="joystick.startControl()" ' +
+            'ng-touchend="joystick.endControl()" ' +
+            'ng-touchmove="joystick.move($event)" ' +
             'ng-mousedown="joystick.startControl()" ' +
             'ng-mouseup="joystick.endControl()" ' +
             'ng-mousemove="joystick.move($event)" ' +
+            
             //'hmPanstart"="joystick.startControl()" ' +
             //'hmPanmove"="joystick.move($event)" ' +
             //'hmPanend"="joystick.endCotrol()" ' +
@@ -125,8 +129,9 @@ angular.module('angular-joystick').provider('JoystickService', function () {
                 lastTouch = new Date().getTime();
 
                 var x, y;
-
-                if(evt.originalEvent && evt.originalEvent.touches){
+				console.log(evt)
+                if(evt && evt.touches){
+					
                     evt.preventDefault();
                     var left = 0;
                     var fromTop = 0;
@@ -136,8 +141,8 @@ angular.module('angular-joystick').provider('JoystickService', function () {
                         fromTop = fromTop + parseInt(elem.offsetTop);
                         elem = elem.offsetParent;
                     }
-                    x = evt.originalEvent.touches[0].clientX - left;
-                    y = evt.originalEvent.touches[0].clientY - fromTop;
+                    x = evt.touches[0].clientX - left;
+                    y = evt.touches[0].clientY - fromTop;
                 } else {
                     x = evt.offsetX;
                     y = evt.offsetY;

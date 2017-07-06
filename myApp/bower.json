@@ -5,6 +5,8 @@
     "ionic": "driftyco/ionic-bower#1.3.3"
   },
   "dependencies": {
-    "angular-joystick": "^0.1.0"
+    "angular-joystick": "^0.1.0",
+    "ngtouchstart": "^1.0.1",
+    "ngtouch": "^1.0.2"
   }
 }
