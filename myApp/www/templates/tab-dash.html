@@ -19,9 +19,9 @@
 
     <div class="content">
         <div>
-            <div id="videoContainer"></div>
+            <div ng-class="{'stream_img_landscape' : isPortrait==false , 'stream_img_portrait' : isPortrait==true}" id="videoContainer"></div>
         </div>
-        <div ng-class="{'joystick_landscape' : isPortrait==false , 'joystick_portrait' : isPortrait==true}">
+        <div ng-class="{'joystick_landscape' : isPortrait==false , 'joystick_portrait' : isPortrait==true}" class="joystick">
             <angular-joystick  coords="coords" on-move="joystickMove()"></angular-joystick>
         </div>
 
